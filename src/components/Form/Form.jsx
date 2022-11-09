@@ -1,7 +1,7 @@
 import {Component} from 'react';
-import {Box} from './Box'
+import {Box} from '../Box'
 import { nanoid } from 'nanoid'
-import * as css from './Form.styled';
+import {Input, Button, Label}from './Form.styled';
 
 
 
@@ -11,12 +11,6 @@ export class Form extends Component {
     state = {
         name: '',
         number: '',
-        id:''
-        }
-        initialState ={
-            name: '',
-            number: '',
-            id:''
         }
         handleChange = event => {
             const {name, value} = event.currentTarget;
@@ -28,7 +22,10 @@ export class Form extends Component {
             this.resetForm();
         }
         resetForm = () => {
-            this.setState(this.initialState)
+            this.setState({
+                name: '',
+                number: '',
+            })
         }
     render(){
     return(
@@ -38,8 +35,8 @@ export class Form extends Component {
      width={400}
      onSubmit={this.handleSubmit}
       >
-        <css.Label htmlFor='name' >Name</css.Label>
-            <css.Input 
+        <Label htmlFor='name' >Name</Label>
+            <Input 
                 id="name"
                 type="text"
                 name="name"
@@ -49,8 +46,8 @@ export class Form extends Component {
                 required
                 onChange={this.handleChange}
                 />
-                <css.Label htmlFor="number">Number</css.Label>
-                <css.Input
+                <Label htmlFor="number">Number</Label>
+                <Input
                   id="number"
                   type="tel"
                   name="number"
@@ -60,7 +57,7 @@ export class Form extends Component {
                   required
                   onChange={this.handleChange}
                 />
-                <css.Button type="submit">Add contact</css.Button>
+                <Button type="submit">Add contact</Button>
     </Box >
                 )
     }

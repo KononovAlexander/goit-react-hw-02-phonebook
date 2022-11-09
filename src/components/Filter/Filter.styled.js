@@ -11,19 +11,7 @@ border-radius:4px;
     box-shadow: 0 0 5px 0.2rem rgba(52, 143, 235, 0.8);
 }
 `;
-export const Button = styled.button`
-width:33%;
-padding:4px 8px;
-`;
-
 export const Label = styled.label`
 font-size:24px;
 margin-bottom:8px;
-`;
-export const Titleh2 = styled.h2`
-font-size:36px;
-`;
-export const List = styled.ul`
-font-size:24px;
-padding-left:0;
 `;

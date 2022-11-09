@@ -1,29 +1,28 @@
 import React, {Component} from 'react';
 import {Box} from './Box'
-import { Form } from './Form';
-import { Contacts } from './Contacts';
-import { Filter } from './Filter';
-import * as css from './Form.styled';
+import { Form } from './Form/Form';
+import { Contacts } from './Contacts/Contacts';
+import { Filter } from './Filter/Filter';
+import styled from 'styled-components';
 
-
+const Title = styled.h2`
+font-size:36px;
+`;
 
  export  class App extends Component { 
   state = {
     contacts: [],
-    name: '',
     filter: ''
     }
     
     addContact = data => {
-      this.state.contacts.find(contact => contact.name === data.name) ? alert(`${data.name} is allready in contacts`):
-      this.setState(prevState => ({ 
+      const isExist = this.state.contacts.find(contact => contact.name === data.name);
+      isExist ? alert(`${data.name} is allready in contacts`): this.setState(prevState => ({ 
         contacts: [...prevState.contacts, data]
-        
       }));
     }
 
     deleteContact = id => {
-      // console.log('id: ', id);
       this.setState(prevState => ({
         contacts: prevState.contacts.filter(contact => contact.id !== id )
       }))
@@ -32,8 +31,6 @@ import * as css from './Form.styled';
 
     changeFilter = (event) => {
       this.setState({filter: event.currentTarget.value })
-      console.log('filteredContacts: ', this.filteredContacts);
-
     }
   
     render() {
@@ -50,16 +47,17 @@ import * as css from './Form.styled';
           }}
         >
           <div>
-            <css.Titleh2>Phonebook</css.Titleh2>
+            <Title>Phonebook</Title>
           <Form onSubmit={this.addContact}/>
 
           </div>
           <Box width={400}>
-          <css.Titleh2>Contacts</css.Titleh2>
-            <Filter value={this.state.filter} onChange={this.changeFilter}  />
+          <Title>Contacts</Title>
+            <Filter value={this.state.filter} 
+                    onChange={this.changeFilter}  
+                    filter={this.state.filter} 
+                    contacts={this.state.contacts} />
             <Contacts 
-              contact={this.state.contacts} 
-              filter={this.state.filter} 
               deleteContact={this.deleteContact}/>
           </Box>
         </div>
